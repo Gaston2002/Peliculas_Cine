@@ -1,0 +1,19 @@
+﻿@using PeliculasMovies.Shared.Entidades
+<EditForm Model="Genero" OnValidSubmit="OnValidSubmit">
+    <div class="form-group">
+        <label>Nombre:</label>
+        <div>
+            <input class="form-control" @bind-value="@Genero.Nombre" />
+            <ValidationMessage For="@(() => Genero.Nombre)" />
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Guardar Cambios</button>
+
+</EditForm>
+
+@code {
+    [Parameter] public Genero Genero { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+}

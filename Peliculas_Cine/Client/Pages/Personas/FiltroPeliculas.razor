@@ -1,0 +1,76 @@
+﻿@page "/peliculas/buscar"
+
+<h3>Filtro Peliculas</h3>
+
+<div class="form-inline">
+    <div class="form-group mb-2">
+        <label for="titulo" class="sr-only">Titulo</label>
+        <input @bind-value="titulo" @bind-value:event="oninput"
+               @onkeypress="@((KeyboardEventArgs e) => TituloKeyPress(e))"
+               type="text" class="form-control" id="titulo" placeholder="Titulo Pelicula" />
+    </div>
+
+    <div class="form-group mx-ms-3 mb-2">
+        <select class="form-control" @bind="generoSeleccionado">
+            <option value="0">---Seleccione un genero--</option>
+            @foreach (var item in generos) //ojo aca generos o Genero
+            {
+                <option value="@item.Id">@item.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="checkbox" class="form-check-input id = " estrenos" @bind="futurosEstrenos" />
+        <label class="form-check-label" for="estrenos">
+            Futuros Estrenos
+        </label>
+    </div>
+
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="checkbox" class="form-check-input id ="cartelera" @bind="enCartelera" />
+        <label class="form-check-label" for="estrenos">
+            En cartelera
+        </label>
+    </div>
+
+
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="checkbox" class="form-check-input id="masVotadas" @bind="masVotadas" />
+        <label class="form-check-label" for="estrenos">
+            Mas Votadas
+        </label>
+    </div>
+
+    <button type="button" class="btn btn-primary mb-2 mx-sm-3" @onclick="CargarNuevasPeliculas">Filtar</button>
+
+    <button type="button" class="btn btn-danger mb-2 " @onclick="LimpairOnClick">Limpiar</button>
+
+</div>
+
+@code {
+    string titulo = "";
+    string generoSeleccionado = "";
+    private bool futurosEstrenos = false;
+    private bool enCartelera = false;
+    private bool masVotadas = false;
+    private List<Genero> generos = new List<Genero>();
+
+
+    private void TituloKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            //....
+        }
+    }
+
+    private void CargarNuevasPeliculas()
+    {
+        Console.WriteLine($"titulo: {titulo}");
+        Console.WriteLine($"generoSeleccionado: {generoSeleccionado}");
+        Console.WriteLine($"enCartelera:{enCartelera}");
+        Console.WriteLine($"futurosEstrenos:{futurosEstrenos}");
+        Console.WriteLine($"masVotados:{masVotadas}");
+    }
+}
